@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>关闭</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="网络同步中" transform="translate(-666.000000, -238.000000)" fill="#999999">
+            <g id="Head" transform="translate(312.000000, 221.000000)">
+                <path d="M362,23 L369,23 C369.552285,23 370,23.4477153 370,24 C370,24.5522847 369.552285,25 369,25 L362,25 L362,32 C362,32.5522847 361.552285,33 361,33 C360.447715,33 360,32.5522847 360,32 L360,25 L353,25 C352.447715,25 352,24.5522847 352,24 C352,23.4477153 352.447715,23 353,23 L360,23 L360,16 C360,15.4477153 360.447715,15 361,15 C361.552285,15 362,15.4477153 362,16 L362,23 Z" id="关闭" transform="translate(361.000000, 24.000000) rotate(45.000000) translate(-361.000000, -24.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

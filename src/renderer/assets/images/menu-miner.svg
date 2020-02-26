@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>编组复制</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页" transform="translate(-25.000000, -152.000000)">
+            <g id="NAV">
+                <g id="编组复制" transform="translate(23.000000, 150.000000)">
+                    <rect id="矩形" x="0" y="0" width="22" height="22"></rect>
+                    <path d="M3,2 L19,2 C19.5522847,2 20,2.44771525 20,3 L20,9 C20,9.55228475 19.5522847,10 19,10 L3,10 C2.44771525,10 2,9.55228475 2,9 L2,3 C2,2.44771525 2.44771525,2 3,2 Z M3,12 L19,12 C19.5522847,12 20,12.4477153 20,13 L20,19 C20,19.5522847 19.5522847,20 19,20 L3,20 C2.44771525,20 2,19.5522847 2,19 L2,13 C2,12.4477153 2.44771525,12 3,12 Z M15,5 L17,5 L17,7 L15,7 L15,5 Z M15,15 L17,15 L17,17 L15,17 L15,15 Z M12,5 L14,5 L14,7 L12,7 L12,5 Z M12,15 L14,15 L14,17 L12,17 L12,15 Z" id="形状结合" fill="#5E6C84"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

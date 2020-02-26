@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    color: #333;
+    background: #fff;
+    font-size: 14px;
+    margin: 0 auto;
+    font-family: 'Helvetica', 'PingFangSC', 'Arial Negreta', 'Arial Normal', 'Arial';
+    font-weight: normal;
+}
+
+.draggable {
+    -webkit-app-region: drag;
+}
+
+ul,
+li,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+    cursor: pointer;
+}
+
+.button {
+    -webkit-app-region: no-drag;
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+
+.no-drag {
+    -webkit-app-region: no-drag;
+}

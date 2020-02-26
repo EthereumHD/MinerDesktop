@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="974px" height="119px" viewBox="0 0 974 119" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>路径 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#00B000" stop-opacity="0.116641171" offset="0%"></stop>
+            <stop stop-color="#00B000" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.545963542">
+        <g id="导入KeyStore" transform="translate(0.000000, -601.000000)" fill="url(#linearGradient-1)">
+            <path d="M-237,638.5 C-142.333333,576.5 -28.3333333,576.5 105,638.5 C305,731.5 496,728.5 600,683.5 C704,638.5 732,645.5 830,669.5 C928,693.5 1037,742.5 1037,769.5 C1037,787.5 612.333333,791.166667 -237,780.5 L-237,638.5 Z" id="路径-4"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>编组</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 3.58974359e-05 13.9600716 3.58974359e-05 13.9600716 7.98923306 0 7.98923306"></polygon>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="资金管理" transform="translate(-966.000000, -352.000000)">
+            <g id="质押合约地址" transform="translate(740.000000, 261.000000)">
+                <g id="编组" transform="translate(230.000000, 98.000000) rotate(90.000000) translate(-230.000000, -98.000000) translate(223.000000, 94.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M1.71437778,7.68479145 C1.33183077,8.08097949 0.70051453,8.09186838 0.304446154,7.70932137 C-0.0917418803,7.32677436 -0.102750427,6.69545812 0.279916239,6.29938974 C0.287933333,6.29113333 0.296070085,6.28287692 0.304446154,6.27485983 L6.28735214,0.291953846 C6.67671966,-0.0972940171 7.30791624,-0.0972940171 7.69728376,0.291953846 L13.6801897,6.27485983 C14.0627368,6.67092821 14.0517282,7.30224444 13.6557795,7.68479145 C13.2692838,8.05800513 12.6566342,8.05800513 12.2702581,7.68479145 L6.99225812,2.40691111 L1.71437778,7.68479145 Z" id="Fill-1" fill="#E8EAED" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
