@@ -3,16 +3,19 @@
         <div class="label">{{ l.MINERTITLE }}</div>
         <div class="avenue-info">
             <ul class="avenue-ul">
+                <!-- 矿机数量 -->
                 <li>
                     <div class="icon icon-miners"></div>
                     <p class="text">{{ l.MINERCOUNT }}</p>
                     <p class="focus">{{ tableData.length }}</p>
                 </li>
+                <!-- 在线矿机 -->
                 <li>
                     <div class="icon icon-miners-online"></div>
                     <p class="text">{{ l.ONLINEMINER }}</p>
                     <p class="focus">{{ totalMinerOnline }}</p>
                 </li>
+                <!-- 矿机总容量 -->
                 <li>
                     <div class="icon icon-miners-capacity"></div>
                     <p class="text">{{ l.MINERCAPACITY }}</p>
@@ -25,13 +28,16 @@
             <span class="add-miner" @click="addMiner">{{ l.ADDMINER }}</span>
         </div>
         <el-table v-if="tableData.length" :data="tableData" style="width: 100%">
+            <!-- 矿机名称 -->
             <el-table-column prop="name" :label="l.MINERNAME" width="200"></el-table-column>
+            <!-- 容量 -->
             <el-table-column
                 prop="capacity"
                 :formatter="(row, column, cell) => _f('toPb')(cell)"
                 :label="l.CAPACITY"
                 width="200"
             ></el-table-column>
+            <!-- 状态 -->
             <el-table-column :label="l.STATUS" width="200">
                 <template slot-scope="scope">
                     <p>
@@ -45,8 +51,10 @@
                     </p>
                 </template>
             </el-table-column>
+
             <el-table-column :label="l.ACTION">
                 <template slot-scope="scope">
+                    <!-- 设置 -->
                     <el-button
                         @click.native.prevent="setMiner(scope.$index)"
                         type="text"
@@ -72,11 +80,16 @@
                                 @click.native.prevent="restartMiner(scope.$index)"
                             >{{ l.CONFIRM }}</el-button>
                         </div>
-
-                        <el-button type="text" size="small" slot="reference">{{ l.RESTART }}</el-button>
+                        <!-- 重启 -->
+                        <el-button
+                            type="text"
+                            size="small"
+                            slot="reference"
+                            @click.native.prevent="restartMiner(scope.$index)"
+                        >{{ l.RESTART }}</el-button>
                     </el-popover>
-
-                    <el-popover placement="top" width="160" trigger="click" v-model="unbindVisible">
+                    <!-- 原版解绑（打包后才生效） -->
+                    <!-- <el-popover placement="top" width="160" trigger="click" v-model="unbindVisible">
                         <p style="font-size: 12px;margin-bottom: 16px;">{{ l.UNBINEMINERCONFIRM }}</p>
                         <div style="text-align: right; margin: 0">
                             <el-button
@@ -90,8 +103,22 @@
                                 @click.native.prevent="unbindMiner(scope.$index)"
                             >{{ l.CONFIRM }}</el-button>
                         </div>
-                        <el-button slot="reference" type="text" size="small">{{ l.UNBIND }}</el-button>
-                    </el-popover>
+                        <el-button slot="reference" type="text" size="small" @click.native.prevent="unbindMiner(scope.$index)">{{ l.UNBIND }}</el-button>
+                    </el-popover>-->
+                    <!-- 更改后的解绑 -->
+                    <el-button
+                        slot="reference"
+                        type="text"
+                        size="small"
+                        @click.native.prevent="unbindMiner(scope.$index)"
+                    >{{ l.UNBIND }}</el-button>
+                    <!-- 删除 -->
+                    <el-button
+                        slot="reference"
+                        type="text"
+                        size="small"
+                        @click.native.prevent="delMiner(scope.$index)"
+                    >{{l.DELETE}}</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -120,7 +147,7 @@
                     <div class="input-component">
                         <div class="item-label">{{ l.SEACHRESULT }}</div>
                         <div class="miner-list" v-if="minerList.length > 0">
-                            <div class="miner-item" v-for="miner in minerList">
+                            <div class="miner-item" v-for="(miner,index) in minerList" :key="index">
                                 <div class="icon"></div>
                                 <div class="info">
                                     <!-- 矿机硬盘地址 -->
@@ -154,7 +181,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- 设置菜单 -->
         <div class="poc-dialog miner-dialog" v-show="ifShowMiningSetting">
             <div class="dialog-wrapper">
                 <div class="title">
@@ -207,6 +234,7 @@
                                 class="disk"
                                 v-for="(disk,index) in currentMiner.disks"
                                 @click="selectDisk(index)"
+                                :key="index"
                             >
                                 <div class="info">
                                     <div class="name">
@@ -282,11 +310,10 @@ export default {
     },
     created() {
         this.toggleLanguage = this.toggleLanguage.bind(this);
-
         this.toggleLanguage();
     },
     beforeDestroy() {
-        console.log("Destroy minerpage...");
+        console.log("Destroy minerpage..."); // 销毁当前页面信息
         ipcRenderer.removeListener("lang-changed", this.toggleLanguage);
     },
     mounted() {
@@ -334,6 +361,7 @@ export default {
             for (let i = 0; i < minerList.length; i++) {
                 amount += parseInt(minerList[i].device.diskInfo.all);
             }
+
             this.totalMinerCapacity = amount;
             //查看是否在线....
             this.totalMinerOnline = minerList.length;
@@ -349,7 +377,7 @@ export default {
         async getMinerStatus(ip) {
             let mineWeb3 = new Web3PocMinedev(ip);
             let result = await mineWeb3.Status();
-            console.log("Miner Status:", result);
+            // console.log("Miner Status:", result);
             return result;
         },
         selectAll() {
@@ -454,32 +482,68 @@ export default {
                 });
             }
         },
+        // 解绑矿机
         async unbindMiner(index) {
-            this.unbindVisible = false;
-            let ip = this.tableData[index].ip;
-            console.log(ip);
-            let mineWeb3 = new Web3PocMinedev(ip);
-            let result = await mineWeb3.Unbind(this.address);
-            console.log("Unbind status:", result);
-            if (result.err == "ok") {
-                let data = ipcRenderer.sendSync("delete-miner", index);
-                console.log("get-miner", data);
-                //删除本地矿机
-                this.tableData.splice(index, 1);
-                this.$message({
-                    message: this.l.MINERUNBINDED,
-                    type: "success"
+            this.$confirm(this.l.UNBINEMINERCONFIRM, "", {
+                confirmButtonText: this.l.CONFIRM,
+                cancelButtonText: this.l.CANCEL,
+                type: "warning"
+            })
+                .then(async () => {
+                    this.unbindVisible = false;
+                    let ip = this.tableData[index].ip;
+                    console.log(ip);
+                    let mineWeb3 = new Web3PocMinedev(ip);
+                    let result = await mineWeb3.Unbind(this.address);
+                    console.log("Unbind status:", result);
+                    console.log(`当前add == ${this.address}`);
+                    if (result.err == "ok") {
+                        let data = ipcRenderer.sendSync("delete-miner", index);
+                        console.log("get-miner", data);
+                        //删除本地矿机
+                        this.tableData.splice(index, 1);
+                        this.$message({
+                            message: this.l.MINERUNBINDED,
+                            type: "success"
+                        });
+                        //需要更新矿机数量
+                        this.setMyMiners();
+                    } else {
+                        this.$message({
+                            message: this.l.MINERUNBINDEDFAILED,
+                            type: "failure"
+                        });
+                    }
+                })
+                .catch(() => {
+                    console.log("已取消");
                 });
-
-                //需要更新矿机数量
-                this.setMyMiners();
-            } else {
-                this.$message({
-                    message: this.l.MINERUNBINDEDFAILED,
-                    type: "failure"
-                });
-            }
         },
+
+        async delMiner(index) {
+            this.$confirm(this.l.DELETEMINERCONFIRM, "", {
+                confirmButtonText: this.l.CONFIRM,
+                cancelButtonText: this.l.CANCEL,
+                type: "warning"
+            })
+                .then(async () => {
+                    this.unbindVisible = false;
+                    let data = ipcRenderer.sendSync("delete-miner", index);
+                    console.log("get-miner", data);
+                    //删除本地矿机
+                    this.tableData.splice(index, 1);
+                    this.$message({
+                        message: this.l.MINERDELETEFAILED,
+                        type: "success"
+                    });
+                    //需要更新矿机数量
+                    this.setMyMiners();
+                })
+                .catch(() => {
+                    console.log("已取消");
+                });
+        },
+
         // 添加矿机
         addMiner() {
             console.log("Add miner..");
@@ -500,12 +564,10 @@ export default {
 
         setMyMinersInfo(tableData) {
             tableData.forEach(item => {
-                console.log(item);
                 item.status = this.l.GETTINGSTATUS;
-
                 this.getMinerStatus(item.ip)
                     .then(res => {
-                        console.log("status:", res.status);
+                        console.log("在线矿机状态:", res.status);
                         item.status = res.status;
                         item.name = res.hostname || item.name;
                         item.plotsize = res.plotsize;
@@ -534,9 +596,7 @@ export default {
         async bindMiner(miner) {
             //如果已经添加，则报错
             let tableData = ipcRenderer.sendSync("get-global", "minerList");
-            if (
-                tableData.find(item => (item.mac = miner.device.serialNumber))
-            ) {
+            if (tableData.find(item => item.mac == miner.device.serialNumber)) {
                 this.$message({
                     message: this.l.MINERADDEDALREADY,
                     type: "warning"
@@ -575,10 +635,10 @@ export default {
         async searchMiner(allowNullMac = false) {
             console.log("MinePage Start to search......");
             this.addMacError = "";
-            if (this.macAddr == "") {
-                this.addMacError = this.l.EMPTYMACERROR;
-                return;
-            }
+            // if (this.macAddr == "") {
+            //     this.addMacError = this.l.EMPTYMACERROR;
+            //     return;
+            // }
             if (this.searchProcess == 1) {
                 console.log("Searching......");
                 return;
@@ -586,15 +646,12 @@ export default {
             this.searchProcess = 1;
             console.log("Miner Mac:" + this.macAddr);
             let minerList = await common.discovery(this.macAddr);
-            console.log("搜索后返回的结果↓");
-            console.log(minerList);
             let address = this.address.startsWith("0x")
                 ? this.address
                 : "0x" + this.address;
             let hash = "0x" + md5(address);
             //检查userHash
             minerList.forEach((item, index) => {
-                console.log(item);
                 if (!item) {
                     minerList.splice(index, 1);
                     return;
@@ -606,6 +663,8 @@ export default {
                 }
             });
             this.minerList = minerList;
+            console.log("搜索后返回的结果👇");
+            console.log(JSON.stringify(this.minerList));
             this.searchProcess = 2;
         }
     }
@@ -793,6 +852,10 @@ export default {
 
 .avenue-info {
     margin-bottom: -10px;
+}
+// 强制修改ele样式
+.el-button + .el-button {
+    margin: 0 !important;
 }
 
 .avenue-ul {

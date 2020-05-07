@@ -19,6 +19,8 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
 // Vue.prototype.$ajax = axios
 Vue.config.productionTip = false
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true' // 解决一部分waring
+
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,6 +1,6 @@
 <template>
     <div class="poc-menu">
-        <h5 class="logo">POC</h5>
+        <h5 class="logo">EHD</h5>
         <el-menu
             :default-active="index"
             class="el-menu-vertical-demo"
@@ -105,7 +105,7 @@ export default {
     }
     .logo {
         height: 64px;
-        background: url(../assets/images/logo.svg) left center no-repeat;
+        background: url(../assets/images/logo.png) left center no-repeat;
         background-size: auto 30px;
         line-height: 64px;
         width: 80px;

@@ -65,7 +65,7 @@
                                 class="focus"
                                 :title="l.CLICKOPEN"
                                 :href="scope.row.hash | getPocScanLink('hash')"
-                            >{{ (scope.row.hash || '').replace('0x', 'poc') }}</a>
+                            >{{ (scope.row.hash || '').replace('ehd', '0x') }}</a>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -75,7 +75,7 @@
         <div class="tab-monitor-content" v-if="type == 'monitor'">
             <div class="wrapper">
                 <div class="data-monitor">
-                    <div class="item" v-for="block in blockList" :key="block.number">
+                    <div class="item" v-for="(block,index) in blockList" :key="index">
                         <p>{{ block.timestamp }}: 🔨 new block mined, height {{ block.number | toDex }}</p>
                         <p>{{ block.timestamp }}:: block hash {{ block.hash | toAddr }}, minner {{ block.miner | toAddr }}, reward {{ block.reward | toPoc | formatNumber }} {{ unit }}</p>
                         <p>{{ block.timestamp }}:: nonce={{ block.nonce | replace0x }},dificulty={{ block.difficulty | formatNumber }},deadline={{ block.deadline | formatNumber }}</p>
@@ -292,7 +292,6 @@ export default {
                 let promise2 = new Promise((resolve, reject) => {
                     this.web3.eth.getBlock(blockHeight, (err, res) => {
                         console.log("getBlock returned..");
-
                         if (err) {
                             reject(err);
                         } else {
@@ -326,17 +325,22 @@ export default {
             }
         },
         toggleSummary(b) {
+            console.log(b);
             if (b) {
                 this.type = "summary";
             } else {
                 this.type = "monitor";
             }
         },
-        // 获取最近的挖矿地址
+        // 最近挖到的区块
         async getRecentMining() {
             let addr = this.address.startsWith("0x")
                 ? this.address
                 : "0x" + this.address;
+            console.log("获取最近的挖矿地址 ↓");
+            console.log(addr);
+            console.log("当前请求地址 👇")
+            console.log(Common.remoteUrl + Common.URL["getRecentMiningByAddr"])
             axios
                 .post(Common.remoteUrl + Common.URL["getRecentMiningByAddr"], {
                     addr: addr,
@@ -345,7 +349,8 @@ export default {
                 })
                 .then(res => {
                     let data = res.data;
-                    console.log('这是getRecentMining=>'+JSON.stringify(data));
+                    console.log('这是getRecentMining 下面');
+                    console.log(JSON.stringify(data));
                     if (data.err_no == 0) {
                         let blocks = data.blocks || [];
                         blocks.forEach(item => {
@@ -356,13 +361,18 @@ export default {
                             ).toFixed(4);
                         });
                         this.tableData = blocks;
+                    }else{
+                        console.log(data)
                     }
                 });
         },
         // 获取挖矿总览
         getMiningInfo() {
+            console.log(`获取挖矿总览的地址 ↓`);
+            console.log(Common.remoteUrl + Common.URL["getSummary"])
             axios.get(Common.remoteUrl + Common.URL["getSummary"]).then(res => {
                 let data = res.data;
+                
                 if (data.err_no == 0) {
                     this.miningInfo = res.data;
                     console.log('挖矿总览'+JSON.stringify(res.data))
