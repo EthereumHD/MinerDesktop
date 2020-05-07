@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="version">v1.0.0</div>
+        <div class="version">v1.0.3</div>
     </div>
 </template>
 
@@ -79,7 +79,7 @@ export default {
             let lang = ipcRenderer.sendSync("get-lang");
             for (let i in this.l) {
                 this.l[i] = lang[i];
-                console.log(i, this.l[i]);
+                // console.log(i, this.l[i]);
             }
         },
         startWebserver() {
@@ -187,7 +187,7 @@ export default {
             let canvas = document.getElementById("canvas");
             qrcode.toCanvas(canvas, codetext, function(error) {
                 if (error) console.error(error);
-                console.log("success!");
+                console.log("二维码生成成功！");
             });
         }
     }

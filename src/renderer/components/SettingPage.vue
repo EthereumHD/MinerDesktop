@@ -37,6 +37,7 @@
                     <p class="text">{{ l.PLEDGETIMES }}({{ unit }}/TB)</p>
                     <p class="focus">{{ pledgeTimes | toFixed(6) }}</p>
                 </li>
+                <!-- 质押合约地址 -->
                 <li>
                     <div class="icon icon-pledge-contract"></div>
                     <p class="text">{{ l.PLEDGECONTRACT }}</p>
@@ -319,6 +320,8 @@ export default {
                 )
                 .then(res => {
                     let data = res.data;
+                    console.log(`地址👇`)
+                    console.log(Common.remoteUrl + Common.URL["getAvenueByAddrCollected"])
                     if (data.err_no == 0) {
                         this.totalRewards = data.total_reward;
                         this.lastXRewards = data.last_x_reward;

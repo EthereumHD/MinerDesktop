@@ -9,7 +9,7 @@ const shell = require("electron").shell;
 export default {
     name: "poc_desktop",
     mounted() {
-        console.log(document.getElementById("app"));
+        // console.log(document.getElementById("app"));
         document.getElementById("app").addEventListener("click", event => {
             let target = event.srcElement || event.target;
             if (target.nodeName.toLowerCase() == "a") {

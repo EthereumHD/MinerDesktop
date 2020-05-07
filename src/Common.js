@@ -9,20 +9,27 @@ Common.WINDOW_SIZE = {
 }
 Common.ISMAX = false;
 
-Common.projectName = 'poc';
+Common.projectName = 'ehd';
 
-Common.remoteUrl = "http://scan." + Common.projectName + ".com/api";
+Common.website = 'https://www.ehd.io'
+
+Common.baseUrl = 'https://scan.ehd.io'
+
+Common.remoteUrl = Common.baseUrl + "/a.php?path=";
 
 Common.URL = {
-	"getRate"                  : `/${Common.projectName}/get_exchange_rate`,
-	"getSummary"               : `/${Common.projectName}/get_summary`,
+	// "getRate"                  : `/${Common.projectName}/get_exchange_rate`,
+    // "getSummary"               : `/${Common.projectName}/get_summary`,
+    "getRate"                  : `/poc/get_exchange_rate`,
+	"getSummary"               : `/poc/get_summary`,
 	"getRecentMiningByAddr"    : "/mining/get_mined_block_by_addr",
 	"getAvenueByAddr"          : "/mining/get_mined_block_by_addr_and_date",
 	"getAvenueByAddrCollected" : "/mining/get_addr_mining_rewards",
 }
 
 Common.pledgeContract = "0x0000000000000000000000000000000000000081";
-Common.web3Provider = `http://gateway.${Common.projectName}.com/`;
+// Common.web3Provider = `http://54.158.193.111:8545`;
+Common.web3Provider = `${Common.baseUrl}/rpc.php`;
 Common.pledgeAbi = pledge.pledgeAbi;
 
 Common.ERRORS = {

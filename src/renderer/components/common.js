@@ -38,15 +38,13 @@ var common = {
 		}
 		return this.stop().then(res => {
 			return new Promise((resolve, reject) => {
-
 				common.log("这里开始搜索矿机。。。");
-
 				try {
 					upnp.startDiscovery(
 
 						{
 							mx: 3,
-							st: 'poc:minner'
+							st: 'ehd:minner'
 							// st: 'upnp:rootdevice' //仅搜索网络中的根设备
 							// st: 'ssdp:all' //搜索所有设备和服务
 							// st: 'uuid:device-UUID' //查询UUID标识的设备
@@ -59,7 +57,6 @@ var common = {
 					console.log('尝试发现矿机')
 
 				} catch (e) {
-					console.log("throw", e);
 					throw e;
 				}
 
@@ -67,11 +64,8 @@ var common = {
 					upnp.stopDiscovery(() => {
 						// this.searching = false;
 						var device_list = upnp.getActiveDeviceList();
-						console.info('获取到发现的列表(并对比过滤用户输入的mac地址)↓')
-						console.log(JSON.stringify(device_list))
-
-
-
+						// console.info('获取到发现的列表(并对比过滤用户输入的mac地址)↓')
+						// console.log(JSON.stringify(device_list))
 						if (mac) {
 							mac = mac.toLowerCase();
 							device_list = device_list.filter(item => {
@@ -81,7 +75,6 @@ var common = {
 								return serialNumber.indexOf(mac) > -1;
 							});
 						}
-						console.log('最后返回的结果👉 ' + device_list)
 						common.log('有多少个被找到了👉 ' + device_list.length);
 						resolve(device_list);
 					});
@@ -96,7 +89,7 @@ var common = {
 			})
 		}).catch(e => {
 			// this.searching = false;
-			return Promise.reject('search poc miner catch...', e);
+			return Promise.reject('search ehd miner catch...', e);
 		})
 	},
 };

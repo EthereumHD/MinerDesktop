@@ -26,6 +26,7 @@ import RightHeader from "./Header";
 import MiningComponent from "./MiningPage";
 import MinerComponent from "./MinerPage";
 import SettingComponent from "./SettingPage";
+import { constants } from 'fs';
 
 export default {
     name: "miner",
@@ -46,8 +47,10 @@ export default {
     },
     mounted() {
         this.wallet = ipcRenderer.sendSync("get-wallet");
-        console.log(this.wallet);
-        this.address = "poc" + this.wallet.addr.toLowerCase().replace("0x", "");
+        console.log('获取到钱包地址，展示在界面 ↓');
+        console.log(this.wallet.addr);
+        // this.address = "ehd" + this.wallet.addr.toLowerCase().replace("0x", "");
+        this.address = this.wallet.addr.toLowerCase();
     },
     methods: {
         toggleMenu(index) {

@@ -1,16 +1,17 @@
-let Common = require('../Common');
+// let Common = require('../Common');
+import Common from '../Common'
 
 let toAddr = (value) => {
 	if (value == undefined) {
 		return "";
 	}
 	value = value.toLowerCase();
-	if (value.startsWith("poc")) {
-		value = value.replace('poc', 'Poc');
+	if (value.startsWith("0x")) {
+		value = value.replace('0x', '0x');
 	} else if (value.startsWith("0x")) {
-		value = value.replace("0x", "Poc");
+		value = value.replace("0x", "0x");
 	} else {
-		value = "Poc" + value;
+		value = "0x" + value;
 	}
 	return value.slice(0, 11) + "..." + value.slice(-8);
 };
@@ -19,25 +20,26 @@ let replace0x = (value) => {
 	if (value == undefined) {
 		return "";
 	}
-	value = value.replace('0x', 'Poc');
+	value = value.replace('0x', '0x');
 	return value;
 }
 
 let getPocScanLink = (value, type) => {
-	let url = `http://scan.${Common.projectName}.com/#/`;
+    let url = `${Common.baseUrl}/#/`;
+    console.log(url);
 	if (value.startsWith('0x')) {
-		value = value.replace('0x', 'poc');
+		value = value.replace('0x', '0x');
 	}
 	if (type == 'hash') {
-		if (!value.startsWith('poc')) {
-			value = 'poc' + value;
-		}
+		if (!value.startsWith('0x')) {
+			value = '0x' + value;
+		}   
 		return url + 'txhash/' + value;
 	} else if (type == 'height') {
 		return url + 'block/' + value;
 	} else if (type == 'address') {
-		if (!value.startsWith('poc')) {
-			value = 'poc' + value;
+		if (!value.startsWith('0x')) {
+			value = '0x' + value;
 		}
 		return url + 'address/' + value;
 	}

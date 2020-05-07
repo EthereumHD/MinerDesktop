@@ -1,8 +1,8 @@
 {
-	"name": "com.poc.desktop",
-	"version": "1.0.0",
-	"author": "POC Developer",
-	"description": "An electron-vue project",
+	"name": "ehd",
+	"version": "1.0.3",
+	"author": "EHD <ehd@gmail.com>",
+    "description": "An electron-vue project",
 	"mac": {
 		"category": "tools"
 	},
@@ -28,8 +28,8 @@
 		"dist": "electron-builder"
 	},
 	"build": {
-		"productName": "POC",
-		"appId": "com.poc.desktop",
+		"productName": "EHD",
+		"appId": "com.ehd.desktop",
 		"directories": {
 			"output": "build"
 		},
@@ -141,6 +141,7 @@
 		"spectron": "^3.8.0",
 		"style-loader": "^0.21.0",
 		"url-loader": "^1.0.1",
+		"vue-devtools": "^5.1.3",
 		"vue-html-loader": "^1.2.4",
 		"vue-loader": "^15.2.4",
 		"vue-style-loader": "^4.1.0",
